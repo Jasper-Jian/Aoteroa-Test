@@ -7,11 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
+import ListItem from './ListItem'
 class showDetailModal extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +45,7 @@ class showDetailModal extends React.Component {
 
     return (
       <div>
-            <Button onClick={this.handleClickOpen}> Details
+            <Button onClick={this.handleClickOpen} size="small" color="primary"> Details
             </Button>
             <Dialog
               fullScreen={fullScreen}
@@ -54,63 +53,17 @@ class showDetailModal extends React.Component {
               onClose={this.handleClose}
               aria-labelledby="responsive-dialog-title"
               >
-
               <DialogTitle id="responsive-dialog-title">{this.props.data.name} Details
               </DialogTitle>
               <DialogContent>
-
-                  <List component="nav">
-
-                    <ListItem button>
-                      <ListItemText>
-                        Name: {this.props.data.name}
-                      </ListItemText>
-                    </ListItem>
-                   <Divider />
-
-                   <ListItem button>
-                     <ListItemText>
-                       Type: {this.props.data.type}
-                     </ListItemText>
-                   </ListItem>
-                   <Divider />
-
-                   <ListItem button>
-                     <ListItemText>
-                      Length: {this.props.data.length}
-                     </ListItemText>
-                   </ListItem>
-                   <Divider />
-                   <ListItem button>
-                     <ListItemText>
-                      Work Description: {this.props.data.work_description}
-                     </ListItemText>
-                   </ListItem>
-                   <Divider />
-                   <ListItem button>
-                     <ListItemText>
-                       Arrival Date: {this.props.data.arrival_date}
-                     </ListItemText>
-                   </ListItem>
-                   <Divider />
-                   <ListItem button>
-                     <ListItemText>
-                  Delivery Date: {this.props.data.delivery_date}
-                     </ListItemText>
-                  </ListItem>
-                    <ListItem button>
-                       <ListItemText>
-                         Status: {this.props.data.status}
-                       </ListItemText>
-                    </ListItem>
-                    <ListItem button>
-                     <ListItemText>
-                      Number of Worker: {this.state.numberOfWorkerOnBoat}
-                     </ListItemText>
-                   </ListItem>
-                   <Divider />
-                 </List>
-
+                <ListItem title = 'Name' Detail = {this.props.data.name} />
+                <ListItem title = 'Type' Detail = {this.props.data.type} />
+                <ListItem title = 'Length' Detail = {this.props.data.length} />
+                <ListItem title = 'Work Description' Detail = {this.props.data.work_description} />
+                <ListItem title = 'Arrival Date' Detail = {this.props.data.arrival_date} />
+                <ListItem title = 'Delivery Date' Detail = {this.props.data.delivery_date} />
+                <ListItem title = 'Status' Detail = {this.props.data.status} />
+                <ListItem title = 'Number of Worker' Detail = {this.props.data.numberOfWorkerOnBoat} />
               </DialogContent>
               <DialogActions>
                 <Button onClick={this.handleClose} color="primary">

@@ -10,7 +10,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import ShowDetailModal from './Modal/showDetailModal'
+import ShowDetailModal from './Modal/showDetailModal';
+import DeleteModal from './Modal/DeleteModal';
+import Modal from './Modal/Modal';
 import axios from 'axios';
 
 const styles = {
@@ -45,6 +47,11 @@ class BoatList extends Component
       const { classes } = this.props;
       return (
         <div>
+          <Modal
+            buttonText = 'Add '
+            title='Add Boat'
+            headerText='Please fill the form for registering the new boat.'
+          />
           <Grid container spacing={16}>
             {
               this.state.boats.map(element => (
@@ -66,12 +73,17 @@ class BoatList extends Component
                     <CardActions>
                       <ShowDetailModal data = {element}/>
 
-                      <Button size="small" color="primary">
-                        Remove
-                      </Button>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
+                      <DeleteModal Header={"Are you sure you want to Delete "+element.name+" ?"}
+                        label = "Delete"
+                        title = "Delete Record"
+                      />
+                      <Modal
+                        buttonText = 'Edit '
+                        title='Edit Boat'
+                        headerText='Please change the field data that you want to edit.'
+                        id={element.id}
+                        data = {element}
+                      />
                     </CardActions>
                   </Card>
                 </Grid>

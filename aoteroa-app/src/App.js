@@ -21,9 +21,7 @@ class App extends Component {
   return (
    <div className="App">
      <p>List of Boat</p>
-     <Button size="small" color="primary">
-       Add
-     </Button>
+
      <Grid container spacing={0}>
        <Grid item xs={1} sm={1} md={1} lg={1}>
        </Grid>
