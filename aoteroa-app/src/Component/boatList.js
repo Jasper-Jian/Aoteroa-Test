@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import ShowDetailModal from './Modal/showDetailModal';
 import DeleteModal from './Modal/DeleteModal';
 import Modal from './Modal/Modal';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  }
-};
-class BoatList extends Component
+//get the state from the redux store
+@connect(
+  (state)=>({
+    boatList:state.boatList,
+  })
+)
+export default class BoatList extends Component
 {
   constructor(props) {
     super(props);
@@ -44,7 +39,9 @@ class BoatList extends Component
   }
 
     render(){
-      const { classes } = this.props;
+      const boatList = this.props.boatList;//data set
+      let tempList = boatList;//create a temp value to store all the list
+
       return (
         <div>
           <Modal
@@ -54,11 +51,16 @@ class BoatList extends Component
           />
           <Grid container spacing={16}>
             {
-              this.state.boats.map(element => (
-                <Grid item>
-                  <Card className={classes.card}>
+              tempList.map(element => (
+                <Grid item key={"boat_Grid_"+element.id}>
+                  <Card style={{
+                    maxWidth: 345
+                  }}>
                     <CardMedia
-                      className={classes.media}
+                      style={{
+                        height: 0,
+                        paddingTop: '56.25%', // 16:9
+                      }}
                       image={element.photo}
                       title={element.name}
                     />
@@ -76,13 +78,15 @@ class BoatList extends Component
                       <DeleteModal Header={"Are you sure you want to Delete "+element.name+" ?"}
                         label = "Delete"
                         title = "Delete Record"
+                        id={element.id}
                       />
                       <Modal
+                        data ={element}
                         buttonText = 'Edit '
                         title='Edit Boat'
                         headerText='Please change the field data that you want to edit.'
                         id={element.id}
-                        data = {element}
+
                       />
                     </CardActions>
                   </Card>
@@ -95,7 +99,3 @@ class BoatList extends Component
     }
 
 }
-BoatList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-export default withStyles(styles)(BoatList);
