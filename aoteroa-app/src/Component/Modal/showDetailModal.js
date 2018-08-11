@@ -8,12 +8,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import axios from 'axios';
 import ListItem from './ListItem'
+
 class showDetailModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      worker: null,
       numberOfWorkerOnBoat:0,
       workName:[]
     };
