@@ -6,7 +6,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { withStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import {deleteBoat} from '../../actions/boatAction';
 let nextBoatId = 0;

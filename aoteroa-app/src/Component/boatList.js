@@ -27,9 +27,7 @@ export default class BoatList extends Component
       boats: [],
     };
   }
-  showModel(){
-    console.log("clicked");
-  }
+
   componentDidMount() {
     axios.get(`http://localhost:3000/boats/`)
       .then(res => {
