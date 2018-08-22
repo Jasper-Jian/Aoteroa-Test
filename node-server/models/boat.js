@@ -1,20 +1,48 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var Boat = sequelize.define('boat', {
-    name:DataTypes.STRING,
-    type:DataTypes.STRING,
-    length:DataTypes.DECIMAL,
-    work_description:DataTypes.STRING,
-    photo:DataTypes.STRING,
-    arrival_date:DataTypes.DATE,
-    delivery_date:DataTypes.DATE,
-  }, {    
-    freezeTableName: true,
+/* jshint indent: 2 */
+
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('boat', {
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    type: {
+      type: DataTypes.ENUM('sail','motor'),
+      allowNull: false
+    },
+    length: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    work_description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    photo: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    arrival_date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    delivery_date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  }, 
+  {
     tableName: 'boat',
+    classMethods: {
+      associate: function (models) {
+// here in the models object you have all the defined models, and can associate each of them like you would manualy do
+        models['worker'].belongsToMany(boat, { through: boat_worker, foreignKey: 'worker_id' });
+      }
+    }
   });
-  Boat.associate = function(models) {
-    // associations can be defined here
-    Boat.hasMany(models.boat_worker, { foreignKey: 'boat_id'} );
-  };
-  return Boat;
 };

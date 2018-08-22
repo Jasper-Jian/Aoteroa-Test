@@ -16,7 +16,18 @@ router.get('/', function (req, res, next) {
         }));
 });
  
- 
+router.get('/', function (req, res, next) {
+    model.boat.findAll({})
+        .then(boat => res.json({
+            error: false,
+            data: boat
+        }))
+        .catch(error => res.json({
+            error: true,
+            data: [],
+            error: error
+        }));
+});
 /* POST todo. */
 router.post('/', function(req, res, next) {
  
